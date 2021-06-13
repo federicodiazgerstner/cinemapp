@@ -28,12 +28,12 @@ function App() {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        const mappedData = data.results.map((movie) => ({
+        const mappedData = data.results.map((movie, key) => ({
           id: movie.id,
           title: movie.title,
           vote: movie.vote_average,
           overview: movie.overview,
-          year: movie.release_date.split("-")[0],
+          year: movie.release_date,
           img: `https://image.tmdb.org/t/p/w300${movie.poster_path}`,
           imgback: `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
         }));
@@ -42,6 +42,8 @@ function App() {
   }
 
   function handleChange(value) {
+    setClicked(false);
+    setClickedMovie({});
     if (value !== "") {
       fetchData(
         `https://api.themoviedb.org/3/search/movie?api_key=6d70914c66326c0134b0e0329c7bf0d2&language=en-US&query=${value}&page=1&include_adult=false`

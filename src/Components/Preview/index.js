@@ -10,7 +10,7 @@ function Preview(props) {
         <img src={movie.imgback} alt={movie.title} className="movie-img" />
         <h1 className="movie-title">{movie.title}</h1>
         <div className="data-container">
-          <h2 className="movie-year">{movie.year}</h2>
+          <h2 className="movie-year">{movie.year.split("-")[0]}</h2>
           <div className="popularity">
             <FaStar size="22" />
             <h2 className="movie-popularity">{movie.vote}</h2>
