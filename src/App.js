@@ -88,6 +88,45 @@ function App() {
       <div className="movie-container">
         <MovieList movielist={filteredMovies} />
       </div>
+      <div className="footer">
+        <div className="title-container">
+          <h1 className="title">
+            Become a member now and enjoy multiple benefits!
+          </h1>
+        </div>
+        <div className="form-container">
+          <h1 className="form-title">Create Account</h1>
+          <input
+            type="text"
+            className="input"
+            name="firstname"
+            placeholder="Name"
+          />
+          <input
+            type="text"
+            className="input"
+            name="email"
+            placeholder="Email"
+          />
+          <input
+            type="password"
+            className="input"
+            name="password"
+            placeholder="Password"
+          />
+          <div className="flex-container">
+            <p className="subtext">
+              Already have an account?{" "}
+              <a href="/" className="link">
+                Sign In
+              </a>
+            </p>
+            <a href="/">
+              <p className="button">Create Account</p>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

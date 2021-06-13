@@ -55,3 +55,61 @@
 .movie-containter {
   display: grid;
 }
+
+.footer {
+  height: 40vh;
+  background-color: rgb(63, 63, 63);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+}
+
+.title-container,
+.form-container {
+  width: 30%;
+}
+
+.input {
+  display: block;
+  width: 450px;
+  height: 30px;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+}
+
+.form-title {
+  font-weight: bold;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.subtext {
+  color: #fff;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 460px;
+}
+
+.link {
+  text-decoration: none;
+  color: #ff0000;
+}
+
+.button {
+  padding: 1rem;
+  width: 150px;
+  color: #fff;
+  background-color: #ff0000;
+  border-radius: 40px;
+  border: 1px solid red;
+}
