@@ -58,7 +58,7 @@
 
 .footer {
   height: 40vh;
-  background-color: rgb(63, 63, 63);
+  background-color: rgb(26, 26, 26);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -67,7 +67,7 @@
 
 .title-container,
 .form-container {
-  width: 30%;
+  width: 35%;
 }
 
 .input {
@@ -112,4 +112,8 @@
   background-color: #ff0000;
   border-radius: 40px;
   border: 1px solid red;
+}
+
+.title-container {
+  text-align: start;
 }

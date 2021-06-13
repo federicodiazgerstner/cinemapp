@@ -5,11 +5,14 @@ import Navbar from "./Components/Navbar";
 import Search from "./Components/Search";
 import Filter from "./Components/Filter";
 import MovieList from "./Components/MovieList";
+import Preview from "./Components/Preview";
 import { useState, useEffect, useCallback } from "react";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [clickedMovie, setClickedMovie] = useState({});
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     fetchData(
@@ -30,6 +33,7 @@ function App() {
           title: movie.title,
           vote: movie.vote_average,
           overview: movie.overview,
+          year: movie.release_date.split("-")[0],
           img: `https://image.tmdb.org/t/p/w300${movie.poster_path}`,
           imgback: `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
         }));
@@ -46,6 +50,16 @@ function App() {
       fetchData(
         "https://api.themoviedb.org/3/discover/movie?api_key=6d70914c66326c0134b0e0329c7bf0d2"
       );
+    }
+  }
+
+  function handleMovie(movie) {
+    if (movie === clickedMovie) {
+      setClicked(false);
+      setClickedMovie({});
+    } else {
+      setClickedMovie(movie);
+      setClicked(true);
     }
   }
 
@@ -75,6 +89,7 @@ function App() {
           <Search handleCallback={handleChange} />
         </div>
       </div>
+      {clicked && <Preview movie={clickedMovie} />}
       <div className="discover-section">
         <div className="discover-title">
           <AiFillFire />
@@ -85,8 +100,9 @@ function App() {
           <Filter handleChange={handleRating} />
         </div>
       </div>
+
       <div className="movie-container">
-        <MovieList movielist={filteredMovies} />
+        <MovieList movielist={filteredMovies} handleClick={handleMovie} />
       </div>
       <div className="footer">
         <div className="title-container">
@@ -103,7 +119,7 @@ function App() {
             placeholder="Name"
           />
           <input
-            type="text"
+            type="email"
             className="input"
             name="email"
             placeholder="Email"

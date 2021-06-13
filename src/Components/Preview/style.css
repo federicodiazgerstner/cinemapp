@@ -1,0 +1,48 @@
+.movie-preview {
+  width: 100%;
+  background-color: rgb(19, 19, 19);
+}
+
+.preview-container {
+  margin: 0 auto;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie-img {
+  padding: 10px;
+}
+
+.movie-title {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 10px;
+  color: #fff;
+}
+
+.movie-description {
+  text-align: justify;
+  padding: 20px;
+  color: #fff;
+}
+
+.data-container {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  justify-content: space-between;
+}
+.popularity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.movie-popularity {
+  margin-left: 5px;
+}
