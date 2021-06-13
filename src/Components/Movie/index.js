@@ -5,7 +5,9 @@ function Movie(props) {
 
   return (
     <div className="card" onClick={() => props.handleClick(movie)}>
-      <img src={movie.img} alt={movie.title} />
+      <a href="#preview">
+        <img src={movie.img} alt={movie.title} />
+      </a>
     </div>
   );
 }

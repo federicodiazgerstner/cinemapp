@@ -91,7 +91,7 @@ function App() {
           <Search handleCallback={handleChange} />
         </div>
       </div>
-      {clicked && <Preview movie={clickedMovie} />}
+      <div id="preview">{clicked && <Preview movie={clickedMovie} />}</div>
       <div className="discover-section">
         <div className="discover-title">
           <AiFillFire />
