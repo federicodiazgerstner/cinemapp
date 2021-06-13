@@ -1,23 +1,93 @@
-import logo from './logo.svg';
-import './App.css';
+import "./reset.css";
+import "./App.css";
+import { AiFillFire } from "react-icons/ai";
+import Navbar from "./Components/Navbar";
+import Search from "./Components/Search";
+import Filter from "./Components/Filter";
+import MovieList from "./Components/MovieList";
+import { useState, useEffect, useCallback } from "react";
 
 function App() {
+  const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+
+  useEffect(() => {
+    fetchData(
+      "https://api.themoviedb.org/3/discover/movie?api_key=6d70914c66326c0134b0e0329c7bf0d2"
+    );
+  }, []);
+
+  useEffect(() => {
+    setFilteredMovies(movies);
+  }, [movies]);
+
+  async function fetchData(url) {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        const mappedData = data.results.map((movie) => ({
+          id: movie.id,
+          title: movie.title,
+          vote: movie.vote_average,
+          overview: movie.overview,
+          img: `https://image.tmdb.org/t/p/w300${movie.poster_path}`,
+          imgback: `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+        }));
+        setMovies(mappedData);
+      });
+  }
+
+  function handleChange(value) {
+    if (value !== "") {
+      fetchData(
+        `https://api.themoviedb.org/3/search/movie?api_key=6d70914c66326c0134b0e0329c7bf0d2&language=en-US&query=${value}&page=1&include_adult=false`
+      );
+    } else {
+      fetchData(
+        "https://api.themoviedb.org/3/discover/movie?api_key=6d70914c66326c0134b0e0329c7bf0d2"
+      );
+    }
+  }
+
+  const handleRating = useCallback(
+    (value) => {
+      if (value !== 0) {
+        setFilteredMovies(
+          movies.filter(
+            (movie) => movie.vote <= value && movie.vote >= value / 2
+          )
+        );
+      } else {
+        setFilteredMovies(movies.filter((movie) => movie.vote <= 10));
+      }
+    },
+    [movies]
+  );
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="hero">
+        <Navbar />
+        <div className="search-container">
+          <h1 className="hero-title">
+            Start a new video journey by discovering your next movie.
+          </h1>
+          <Search handleCallback={handleChange} />
+        </div>
+      </div>
+      <div className="discover-section">
+        <div className="discover-title">
+          <AiFillFire />
+          <h2>Discover Movies</h2>
+        </div>
+        <div className="filter-container">
+          <p>Filter by</p>
+          <Filter handleChange={handleRating} />
+        </div>
+      </div>
+      <div className="movie-container">
+        <MovieList movielist={filteredMovies} />
+      </div>
     </div>
   );
 }
